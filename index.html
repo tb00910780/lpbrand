@@ -37,6 +37,14 @@
             max-width: 100%;
             height: auto;
         }
+        .add-to-cart-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -76,9 +84,14 @@
                 const productPrice = document.createElement("p");
                 productPrice.textContent = `Price: Rs ${product.price}`;
 
+                const addToCartButton = document.createElement("button");
+                addToCartButton.className = "add-to-cart-button";
+                addToCartButton.textContent = "Add to Cart";
+
                 productCard.appendChild(productImage);
                 productCard.appendChild(productName);
                 productCard.appendChild(productPrice);
+                productCard.appendChild(addToCartButton);
 
                 productContainer.appendChild(productCard);
             });
