@@ -3,158 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Vegetable & Fruit Store</title>
     <style>
-        /* Add some basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
         }
-
         header {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-
-        nav {
             background-color: #333;
-            padding: 10px 0;
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav li {
-            margin: 0 20px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin: 20px;
-        }
-
-        .item {
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin: 20px;
-            max-width: 200px;
+            color: #fff;
             text-align: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
         }
-
-        .item img {
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .product-image {
             max-width: 100%;
             height: auto;
-        }
-
-        .item p {
-            margin: 10px 0;
-        }
-
-        .add-to-cart-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #4caf50;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cart-details {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            right: 0;
-            z-index: 999;
-        }
-
-        #cart-count {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        #total-price {
-            font-size: 24px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>My Online Store</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="auth.html">Auth Page</a></li>
-            </ul>
-        </nav>
+        <h1>Welcome to Our Store</h1>
     </header>
+    
+    <main>
+        <section id="product-list">
+            <!-- Product cards will go here -->
+        </section>
+    </main>
 
-    <div class="container">
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Item 1 Image" height="150" width="150">
-            <p>Item 1</p>
-            <p>Price: $10.00</p>
-            <button class="add-to-cart-btn" onclick="addToCart(1, 10)">Add to Cart</button>
-        </div>
+    <script>
+        const products = [
+            { name: "Apple", price: 100, image: "apple.jpg" },
+            { name: "Banana", price: 40, image: "banana.jpg" },
+            { name: "Onion", price: 25, image: "onion.jpg" },
+            // Add more products here
+        ];
 
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Item 2 Image" height="150" width="150">
-            <p>Item 2</p>
-            <p>Price: $15.00</p>
-            <button class="add-to-cart-btn" onclick="addToCart(2, 15)">Add to Cart</button>
-        </div>
+        function displayProducts() {
+            const productContainer = document.getElementById("product-list");
 
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Item 3 Image" height="150" width="150">
-            <p>Item 3</p>
-            <p>Price: $12.50</p>
-            <button class="add-to-cart-btn" onclick="addToCart(3, 12.5)">Add to Cart</button>
-        </div>
+            products.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.className = "product-card";
 
-        <div class="item">
-            <img src="https://via.placeholder.com/150" alt="Item 4 Image" height="150" width="150">
-            <p>Item 4</p>
-            <p>Price: $8.75</p>
-            <button class="add-to-cart-btn" onclick="addToCart(4, 8.75)">Add to Cart</button>
-        </div>
-    </div>
+                const productImage = document.createElement("img");
+                productImage.className = "product-image";
+                productImage.src = product.image;
+                productImage.alt = product.name;
 
-    <div class="cart-details">
-        <span id="cart-count">Cart Items: 0</span><br>
-        <span id="total-price">Total Price: $0.00</span>
-    </div>
+                const productName = document.createElement("h2");
+                productName.textContent = product.name;
 
-    <script src="script.js"></script>
+                const productPrice = document.createElement("p");
+                productPrice.textContent = `Price: Rs ${product.price}`;
+
+                productCard.appendChild(productImage);
+                productCard.appendChild(productName);
+                productCard.appendChild(productPrice);
+
+                productContainer.appendChild(productCard);
+            });
+        }
+
+        window.addEventListener("load", displayProducts);
+    </script>
 </body>
 </html>
